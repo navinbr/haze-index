@@ -5,14 +5,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Haze Index">
 <meta name="format-detection" content="telephone=no">
-<meta name="description" content="Estimated hourly PSI for Singapore's five regions, deconvolved in your browser from NEA's 24-hour rolling PSI — with NEA's own hourly PM2.5 for comparison. Independent, unofficial.">
+<meta name="description" content="A personal exploration of Singapore's open air-quality data: hourly estimates for the five regions, worked back from NEA's 24-hour PSI, shown alongside NEA's hourly PM2.5. Independent and unofficial.">
 <meta name="google-site-verification" content="DRpZuYoz2WjP0OflUqdP6_EPmAxDClydVKBhc9wAgRA" />
 <link rel="canonical" href="https://navinbr.github.io/haze-index/">
 <meta property="og:type" content="website"><meta property="og:url" content="https://navinbr.github.io/haze-index/">
 <meta property="og:title" content="Singapore hourly PSI"><meta property="og:site_name" content="Haze Index">
 <meta property="og:description" content="What the air is like this hour, not the rolling average of the last twenty-four. Estimated hourly PSI for Singapore's five regions, from NEA data.">
 <meta property="og:image" content="https://navinbr.github.io/haze-index/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Singapore hourly PSI — deconvolved hourly PSI versus NEA's 24-hour PSI">
+<meta property="og:image:alt" content="Singapore hourly PSI — hourly estimate shown alongside NEA's 24-hour PSI">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@navinbrian">
 <meta name="twitter:title" content="Singapore hourly PSI"><meta name="twitter:description" content="What the air is like this hour, not the rolling average of the last twenty-four.">
 <meta name="twitter:image" content="https://navinbr.github.io/haze-index/og.png">
@@ -102,6 +102,7 @@ h1 em{font-style:normal;color:var(--burgundy)}
 .essay h4{font-weight:500;color:var(--ink);font-size:20px;letter-spacing:-.015em;margin:34px 0 8px}
 .essay h4:first-child{margin-top:0}
 .essay b{font-weight:500;color:var(--ink)}
+.essay a{color:var(--burgundy);text-underline-offset:2px}
 .essay code{font-family:"SF Mono",Menlo,monospace;font-size:13.5px;background:var(--sand);padding:1px 6px;border-radius:5px;color:var(--ink)}
 .eq{background:var(--paper);border:1px solid var(--rule2);border-radius:12px;padding:16px 20px;font-size:15px;color:var(--ink);margin:14px 0;font-weight:400}
 table.vt{border-collapse:collapse;width:100%;margin:16px 0;font-size:14.5px}
@@ -164,10 +165,10 @@ footer .meta a{color:var(--ink2);text-decoration:underline;text-decoration-color
    <div class="eyebrow">Air quality · Five regions · Updated hourly</div>
    <h1>Singapore hourly PSI</h1>
    <p class="sub">What the air is like <em>this hour</em>, not the rolling average of the last twenty-four.</p>
-   <p class="dek">Singapore's official PSI is a 24-hour rolling average. This page inverts that average to recover an estimated hourly PSI for each region, recomputed every time NEA publishes a new reading.</p>
+   <p class="dek">NEA reports Singapore's PSI as a 24-hour rolling average, the measure used for health advisories. This page is a personal exploration of the same open data hour by hour: it works backwards from the 24-hour figures to estimate an hourly value for each region, updated whenever NEA publishes a new reading.</p>
    <div class="scale" id="scale"></div>
   </div>
-  <div class="busy-wrap lede-wrap" data-busy><div class="lede" id="lede"><div class="k">Highest hourly PSI now</div><div class="big">—</div><p>Loading…</p></div></div>
+  <div class="busy-wrap lede-wrap" data-busy><div class="lede" id="lede"><div class="k">Highest hourly estimate now</div><div class="big">—</div><p>Loading…</p></div></div>
  </section>
 
  <div class="sec"><h2>By region</h2><div class="note" id="stamp"></div></div>
@@ -177,7 +178,7 @@ footer .meta a{color:var(--ink2);text-decoration:underline;text-decoration-color
  <div class="panel" data-busy>
   <div class="ph"><h3 id="chartTitle">Central</h3><div class="seg" id="seg"></div></div>
   <div class="legend">
-   <span><i style="border-color:var(--burgundy)"></i>Deconvolved hourly PSI</span>
+   <span><i style="border-color:var(--burgundy)"></i>Hourly estimate (from 24-hour data)</span>
    <span><i style="border-color:var(--dpink);border-top-width:8px;opacity:.6"></i>±1σ uncertainty</span>
    <span><i style="border-color:var(--dblue);border-top-width:3px"></i>NEA 24-hour PSI (published)</span>
    <span><i style="border-color:var(--ink2);border-top-style:dotted"></i>NEA 1-hour PM2.5, on PSI scale</span>
@@ -185,33 +186,33 @@ footer .meta a{color:var(--ink2);text-decoration:underline;text-decoration-color
   <div id="chart" style="height:420px"></div>
  </div>
  <div class="panel" data-busy>
-  <div class="ph"><h3>All regions, deconvolved hourly PSI</h3><div class="legend" id="zleg" style="margin:0"></div></div>
+  <div class="ph"><h3>All regions, hourly estimates</h3><div class="legend" id="zleg" style="margin:0"></div></div>
   <div id="chartAll" style="height:280px"></div>
  </div>
 
  <section class="essay">
   <aside>Method &amp; validation</aside>
   <div class="body">
-   <h4>Why invert the average?</h4>
-   <p>NEA's 24-hour PSI is the right number for health advisories, which are based on day-long exposure. But it lags: when a plume arrives, the 24-hour figure takes most of a day to catch up, and it understates short peaks. NEA does publish hourly PM2.5 concentrations, but not on the PSI scale people know.</p>
+   <h4>What this page does</h4>
+   <p>NEA's 24-hour PSI is the reference for Singapore's health advisories, which are based on day-long exposure, and NEA also publishes hourly PM2.5 concentrations openly. A 24-hour average naturally responds gradually: when haze moves in, the average rises over the following day, and short-lived peaks are spread across the window. This page is a curiosity-driven exercise in how much of the hour-to-hour picture can be recovered from the 24-hour figures alone, and it places NEA's own hourly readings alongside for comparison.</p>
    <h4>The forward model</h4>
-   <p>Each region's 24-hour PM2.5 is exactly the trailing mean of the last 24 hourly readings, rounded to a whole number — we verified this against NEA's own hourly series to within ±0.25 µg/m³. The PSI is then a piecewise-linear function of that concentration. So we invert <b>concentrations</b>, then rescale to PSI.</p>
-   <h4>Why algebra alone fails</h4>
-   <p>In principle <code>x(t) = x(t−24) + 24·[m(t) − m(t−1)]</code> recovers every hour. In practice NEA rounds to integers, and that rounding is multiplied by 24 at every step and compounds day after day: from a perfect start, the error reaches ~30 µg/m³ within a week. A 24-hour mean is also blind to any pattern that repeats exactly every 24 hours.</p>
-   <h4>The inversion</h4>
-   <p>For each region we solve, over the last eight days,</p>
+   <p>Each region's 24-hour PM2.5 value matches the mean of the previous 24 hourly readings, rounded to a whole number (checked against NEA's hourly series to within ±0.25 µg/m³). The PSI is a piecewise-linear function of that concentration, so the estimate is made on <b>concentrations</b> and then converted to the PSI scale using NEA's published breakpoints.</p>
+   <h4>Why simple algebra is not enough</h4>
+   <p>In principle <code>x(t) = x(t−24) + 24·[m(t) − m(t−1)]</code> recovers each hour from the previous day. Because published values are whole numbers, small rounding differences are multiplied by 24 at each step and accumulate over days, so on its own this approach drifts within about a week. A 24-hour mean also carries no information about patterns that repeat exactly every 24 hours.</p>
+   <h4>The estimate</h4>
+   <p>For each region the page solves, over the last eight days,</p>
    <div class="eq">minimise &nbsp;λ·Σ|x<sub>t</sub> − x<sub>t−1</sub>| &nbsp;+&nbsp; μ·Σ max(0, |mean<sub>24</sub>(x)<sub>t</sub> − m<sub>t</sub>| − 0.5) &nbsp; subject to &nbsp;x ≥ 0</div>
-   <p>— the gentlest hourly series consistent with every published value to within rounding (λ = 1, μ = 50), solved in your browser with a pre-conditioned Chambolle–Pock algorithm. The newest hour averages this with a closure estimate, <code>24·m(T) − Σ x̂(T−k)</code>, which reduces lag on rising haze. Hourly PSI is the maximum of the deconvolved PM2.5 and PM10 sub-indices and NEA's published O₃, CO and SO₂ sub-indices.</p>
-   <h4>How well it works</h4>
-   <p>Scored against NEA's hourly PM2.5 on the PSI scale, five regions, 20 Sep – 15 Oct 2026:</p>
-   <table class="vt"><tr><th>Estimate</th><th>RMSE, PSI</th><th>Correlation</th></tr>
- <tr><td>Published 24-h value used as "the hourly value"</td><td>25.9</td><td>–</td></tr>
- <tr class="hl"><td>Deconvolved, real-time (newest hour, as shown in cards)</td><td>11.8</td><td>0.96</td></tr>
- <tr><td>Deconvolved, revised 3 h later</td><td>10.2</td><td>0.97</td></tr>
- <tr><td>Deconvolved, retrospective (full window)</td><td>8.6</td><td>0.98</td></tr></table>
-   <p>Daily peak hourly PSI (n = 120 zone-days): the published 24-h PSI under-states the true daily peak by 27 PSI on average; the real-time deconvolution by 3 (mean absolute error 8). The shaded band is is ±1σ from an empirical error model, σ(µg/m³) ≈ 5.5 + 0.074·x̂ (newest hour) to 4.3 + 0.073·x̂ (≥3 h old).</p>
-   <h4>Caveats</h4>
-   <p>An hourly PSI is an informational rescaling of hourly concentration, not an official index; NEA's health advisories are tied to the 24-hour PSI. The PM10 inversion has no hourly ground truth. Sharp rises are under-estimated by roughly 10–20% in the newest hour and revised within about three hours. Not for medical or operational decisions.</p>
+   <p>— the smoothest hourly series consistent with every published value to within rounding (λ = 1, μ = 50), computed in your browser with a pre-conditioned Chambolle–Pock algorithm. For the newest hour this is averaged with a closure estimate, <code>24·m(T) − Σ x̂(T−k)</code>, which helps it respond to rising haze. The hourly figure shown is the highest of the estimated PM2.5 and PM10 sub-indices and NEA's published O₃, CO and SO₂ sub-indices.</p>
+   <h4>How closely it matches</h4>
+   <p>Compared with NEA's hourly PM2.5 readings converted to the PSI scale, across five regions, 20 Sep – 15 Oct 2026:</p>
+   <table class="vt"><tr><th>Hourly estimate</th><th>RMSE, PSI</th><th>Correlation</th></tr>
+   <tr class="hl"><td>Real-time (newest hour, as shown on the cards)</td><td>11.8</td><td>0.96</td></tr>
+   <tr><td>Same hour, revisited 3 h later</td><td>10.2</td><td>0.97</td></tr>
+   <tr><td>Retrospective (full window)</td><td>8.6</td><td>0.98</td></tr></table>
+   <p>For reference, NEA's 24-hour PSI differs from the hourly readings by 26 PSI (RMSE) — expected, since the two measure different things: one a day-long average, the other a single hour. Across 120 region-days, the day's highest 24-hour value was on average 27 points below the day's highest hourly reading, as is typical of an average; the day's highest hourly estimate was on average 3 points below it (mean absolute difference 8). The shaded band is ±1σ from an empirical error model, σ(µg/m³) ≈ 5.5 + 0.074·x̂ (newest hour) to 4.3 + 0.073·x̂ (≥3 h old).</p>
+   <h4>Please note</h4>
+   <p>The hourly figures are estimates for interest only. They are not an official index, and NEA's 24-hour PSI and health advisories remain the reference for decisions — see <a href="https://www.haze.gov.sg" target="_blank" rel="noopener">haze.gov.sg</a>. The PM10 estimate has no hourly reading to compare against. When haze rises quickly, the newest-hour estimate tends to run about 10–20% low and is refined over the next few hours. Not for medical or operational use.</p>
+   <p>With thanks to NEA and data.gov.sg for making these readings openly available.</p>
   </div>
  </section>
  <footer>
@@ -222,7 +223,7 @@ footer .meta a{color:var(--ink2);text-decoration:underline;text-decoration-color
    <div class="co">Co-developed with Claude Science</div></div></div>
   <div class="meta">
    <div>Contains information from NEA's real-time PSI and PM2.5 datasets, accessed live from <a href="https://data.gov.sg" target="_blank" rel="noopener">data.gov.sg</a>,<br>made available under the terms of the <a href="https://data.gov.sg/open-data-licence" target="_blank" rel="noopener">Singapore Open Data Licence version 1.0</a>.</div>
-   <div>Independent project, made in a personal capacity; views and methods are the author's own and do not represent any employer or institution. Not affiliated with or endorsed by NEA or the Singapore Government. Hourly values are model estimates, not official readings.</div>
+   <div>Independent project, made in a personal capacity; views and methods are the author's own and do not represent any employer or institution. Not affiliated with or endorsed by NEA or the Singapore Government. Hourly values are model estimates for interest only; NEA's 24-hour PSI is the official reading.</div>
    <div id="foot">Refreshes automatically every 10 minutes</div></div>
  </footer>
 </div>
@@ -283,7 +284,7 @@ function setBusy(on,label,detail,frac){
     let o=host.querySelector(':scope > .overlay');
     if(!o){ o=document.createElement('div'); o.className='overlay'; o.innerHTML='<div class="lbl"></div><div class="det"></div><div class="barx"><i></i></div>'; host.appendChild(o); }
     if(!on){ o.classList.add('hide'); continue; }
-    o.classList.remove('hide'); o.classList.toggle('err',label&&/couldn/i.test(label));
+    o.classList.remove('hide'); o.classList.toggle('err',!!(label&&/couldn/i.test(label)));
     if(label!=null) o.querySelector('.lbl').textContent=label;
     if(detail!=null) o.querySelector('.det').textContent=detail;
     const bar=o.querySelector('.barx'); if(frac==null){ bar.style.visibility='hidden'; } else { bar.style.visibility='visible'; bar.firstChild.style.width=Math.round(100*Math.max(0,Math.min(1,frac)))+'%'; }
@@ -350,9 +351,10 @@ function renderScale(){ const el=document.getElementById('scale'); let lo=0;
 function renderLede(){ const {grid,Z}=MODEL,n=grid.length; let best=null;
   for(const r of REGIONS){ const z=Z[r]; if(!best||z.h[n-1]>Z[best].h[n-1]) best=r; }
   const z=Z[best], v=Math.round(z.h[n-1]), p=z.p24[n-1], c=cat(v), gap=v-p;
-  document.getElementById('lede').innerHTML=`<div class="k">Highest hourly PSI now</div>
+  const cmp=!isFinite(p)?'':(gap===0?' — the same as this hour\'s estimate.':` — this hour's estimate is ${Math.abs(gap)} point${Math.abs(gap)===1?'':'s'} ${gap>0?'higher':'lower'}.`);
+  document.getElementById('lede').innerHTML=`<div class="k">Highest hourly estimate now</div>
    <div class="big" style="color:${c[3]}">${v}<small>${cap(best)}</small></div>
-   <p>The published 24-hour PSI for ${cap(best)} reads <b>${isFinite(p)?p:'—'}</b>${isFinite(p)?` — ${gap>=0?'<b>'+gap+' points below</b>':'<b>'+(-gap)+' points above</b>'} the estimated air this hour.`:'.'} Air quality is <b style="color:${c[3]}">${c[1].toLowerCase()}</b>.</p>`; }
+   <p>NEA's 24-hour PSI for ${cap(best)} is <b>${isFinite(p)?p:'—'}</b>${isFinite(p)?cmp:'.'} On the PSI scale, this estimate falls in the <b style="color:${c[3]}">${c[1].toLowerCase()}</b> band.</p>`; }
 function renderCards(){
   const {grid,Z}=MODEL, n=grid.length, el=document.getElementById('cards'); el.innerHTML='';
   document.getElementById('stamp').textContent='Reading for '+fmtT(grid[n-1])+' SGT';
@@ -361,9 +363,9 @@ function renderCards(){
     div.style.setProperty('--c',c[2]); div.style.setProperty('--cd',c[3]);
     div.innerHTML=`<div class="top"><span class="zone">${r}</span><span class="chip">${c[1]}</span></div>
      <div class="num"><span class="big">${Math.round(v)}</span><span class="delta ${d3>0?'up':d3<0?'dn':''}">${d3>0?'↑':d3<0?'↓':'→'} ${Math.abs(d3)} in 3 h</span></div>
-     <div class="sub">Hourly PSI · range ${Math.round(z.lo[n-1])}–${Math.round(z.hi[n-1])} · driven by ${z.drv[n-1]}</div>
+     <div class="sub">Hourly estimate · range ${Math.round(z.lo[n-1])}–${Math.round(z.hi[n-1])} · driven by ${z.drv[n-1]}</div>
      <dl><dt>NEA 24-hour PSI</dt><dd>${isFinite(z.p24[n-1])?z.p24[n-1]:'—'}</dd>
-     <dt>PM2.5, deconvolved</dt><dd>${z.x25[n-1].toFixed(0)} <span>µg/m³</span></dd>
+     <dt>PM2.5, estimated</dt><dd>${z.x25[n-1].toFixed(0)} <span>µg/m³</span></dd>
      <dt>PM2.5, NEA 1-hour</dt><dd>${isFinite(z.pm1[n-1])?z.pm1[n-1]+' <span>µg/m³</span>':'—'}</dd></dl>`;
     div.onclick=()=>{selected=r;renderCards();renderSeg();renderChart();}; el.appendChild(div); }
 }
@@ -387,7 +389,7 @@ function renderChart(){
    {x:X,y:sl(z.lo),mode:'lines',line:{width:0},fill:'tonexty',fillcolor:'rgba(212,163,166,.38)',hoverinfo:'skip'},
    {x:X,y:sl(z.ref),mode:'lines',line:{color:'#4A433B',width:1.1,dash:'dot'},name:'NEA 1-h PM2.5 (PSI scale)',hovertemplate:'%{y:.0f}'},
    {x:X,y:sl(z.p24),mode:'lines',line:{color:'#6E8DAE',width:3,shape:'spline'},name:'NEA 24-h PSI',hovertemplate:'%{y:.0f}'},
-   {x:X,y:sl(z.h),mode:'lines',line:{color:'#7E2A35',width:2},name:'Deconvolved hourly',hovertemplate:'<b>%{y:.0f}</b>'}],
+   {x:X,y:sl(z.h),mode:'lines',line:{color:'#7E2A35',width:2},name:'Hourly estimate',hovertemplate:'<b>%{y:.0f}</b>'}],
    baseLayout({shapes:catShapes(ymax),annotations:catLabels(ymax),yaxis:{gridcolor:'#ECE5D9',zeroline:false,range:[0,ymax],tickfont:{color:'#857B6E'}}}),{displayModeBar:false,responsive:true});
 }
 function renderAll(){
@@ -406,8 +408,8 @@ async function refresh(force){
     setBusy(false);
     dot.className='dot'; setStatus(`Live · ${fmtT(stamp)} reading`);
     document.getElementById('foot').textContent='Last checked '+new Date().toLocaleTimeString('en-SG',{timeZone:'Asia/Singapore',hour:'numeric',minute:'2-digit'})+' SGT · refreshes every 10 minutes';
-  }catch(e){ dot.className='dot idle'; setStatus(`<span class="err">Couldn't reach NEA</span> · retrying in 10 min`); console.error(e);
-    if(MODEL) setBusy(false); else setBusy(true,"Couldn't reach NEA","Retrying automatically in 10 minutes — or reload the page",null); }
+  }catch(e){ dot.className='dot idle'; setStatus(`<span class="err">Couldn't load data</span> · retrying in 10 min`); console.error(e);
+    if(MODEL) setBusy(false); else setBusy(true,"Couldn't load data","Retrying automatically in 10 minutes — or reload the page",null); }
   finally{ BUSY_QUIET=false; }
 }
 let busy=false, lastRun=0;
