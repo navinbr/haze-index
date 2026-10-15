@@ -10,11 +10,11 @@
 <link rel="canonical" href="https://navinbr.github.io/haze-index/">
 <meta property="og:type" content="website"><meta property="og:url" content="https://navinbr.github.io/haze-index/">
 <meta property="og:title" content="Singapore hourly PSI"><meta property="og:site_name" content="Haze Index">
-<meta property="og:description" content="What the air is like this hour, not the rolling average of the last twenty-four. Estimated hourly PSI for Singapore's five regions, from NEA data.">
+<meta property="og:description" content="What the air is probably like this hour, not the rolling average of the last twenty-four. Estimated hourly PSI for Singapore's five regions, from NEA data.">
 <meta property="og:image" content="https://navinbr.github.io/haze-index/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Singapore hourly PSI — hourly estimate shown alongside NEA's 24-hour PSI">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@navinbrian">
-<meta name="twitter:title" content="Singapore hourly PSI"><meta name="twitter:description" content="What the air is like this hour, not the rolling average of the last twenty-four.">
+<meta name="twitter:title" content="Singapore hourly PSI"><meta name="twitter:description" content="What the air is probably like this hour, not the rolling average of the last twenty-four.">
 <meta name="twitter:image" content="https://navinbr.github.io/haze-index/og.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Singapore hourly PSI", "url": "https://navinbr.github.io/haze-index/", "description": "Estimated hourly PSI for Singapore's five regions, deconvolved in your browser from NEA's 24-hour rolling PSI \u2014 with NEA's own hourly PM2.5 for comparison. Independent, unofficial.", "applicationCategory": "Weather", "operatingSystem": "Any (web browser)", "author": {"@type": "Person", "name": "Navin B Ramakrishna", "sameAs": "https://x.com/navinbrian"}, "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "SGD"}}</script>
 <meta name="author" content="Navin B Ramakrishna">
@@ -104,7 +104,7 @@ h1 em{font-style:normal;color:var(--burgundy)}
 .essay b{font-weight:500;color:var(--ink)}
 .essay a{color:var(--burgundy);text-underline-offset:2px}
 .essay code{font-family:"SF Mono",Menlo,monospace;font-size:13.5px;background:var(--sand);padding:1px 6px;border-radius:5px;color:var(--ink)}
-.eq{background:var(--paper);border:1px solid var(--rule2);border-radius:12px;padding:16px 20px;font-size:15px;color:var(--ink);margin:14px 0;font-weight:400}
+.eq{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--paper);border:1px solid var(--rule2);border-radius:12px;padding:16px 20px;font-size:15px;color:var(--ink);margin:14px 0;font-weight:400}
 table.vt{border-collapse:collapse;width:100%;margin:16px 0;font-size:14.5px}
 .vt th{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);text-align:left;padding:8px 0;border-bottom:1px solid var(--ink2)}
 .vt td{padding:10px 0;border-bottom:1px solid var(--rule);color:var(--ink2)}
@@ -122,20 +122,6 @@ footer .meta{text-align:right;line-height:1.7;max-width:560px}
 footer .meta>div+div{margin-top:6px}
 footer .meta a{color:var(--ink2);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:2px}
 .err{color:var(--rust);font-weight:500}
-@media(max-width:560px){
- .wrap{padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left))}
- .bar .wrap{height:52px}.brand span{display:none}.live{font-size:12px}
- .hero{padding:40px 0 28px}.dek{font-size:17px}.lede .big{font-size:72px}
- .grid{grid-template-columns:1fr;grid-template-areas:"central" "north" "east" "west" "south";gap:10px}
- .card{padding:16px 18px 14px}.card .big{font-size:52px}.card:hover{transform:none;box-shadow:none}
- .sec{padding:36px 0 4px;flex-direction:column;gap:4px}.sec h2{font-size:22px}
- .panel{padding:16px 14px 8px;border-radius:14px}.ph{flex-direction:column;align-items:flex-start}
- .seg{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.seg button{padding:6px 11px}
- #chart{height:340px!important}#chartAll{height:240px!important}
- .essay{padding:40px 0 16px;margin-top:40px}.essay .body{font-size:16px}
- footer{flex-direction:column;align-items:flex-start}footer .meta{text-align:left}
- .scale div{font-size:10px}.scale div b{font-size:10.5px}
-}
 @media(max-width:860px){.hero{grid-template-columns:1fr;gap:32px}.lede{border-left:0;padding-left:0;border-top:1px solid var(--rule);padding-top:24px}
  .grid{grid-template-columns:1fr 1fr;grid-template-areas:"north north" "west east" "central central" "south south"}
  .essay{grid-template-columns:1fr;gap:16px}.essay aside{position:static}.wrap{padding:0 20px}}
@@ -155,6 +141,25 @@ footer .meta a{color:var(--ink2);text-decoration:underline;text-decoration-color
 #cardsWrap{min-height:200px}
 .skel{background:var(--paper);border:1px solid var(--rule2);border-radius:14px;height:236px}
 @media(max-width:560px){.overlay .lbl{font-size:22px}.skel{height:200px}}
+/* phone rules last so they win over tablet rules */
+@media(max-width:560px){
+ .wrap{padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left))}
+ .bar .wrap{height:52px}.brand span{display:none}.live{font-size:12px}
+ .hero{padding:40px 0 28px}.dek{font-size:17px}.lede .big{font-size:72px}
+ .grid{grid-template-columns:1fr;grid-template-areas:"central" "north" "east" "west" "south";gap:10px}
+ .card{padding:16px 18px 14px}.card .big{font-size:52px}.card:hover{transform:none;box-shadow:none}
+ .sec{padding:36px 0 4px;flex-direction:column;gap:4px}.sec h2{font-size:22px}
+ .panel{padding:16px 14px 8px;border-radius:14px}.ph{flex-direction:column;align-items:flex-start}
+ .seg{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.seg button{padding:6px 11px}
+ #chart{height:340px!important}#chartAll{height:240px!important}
+ .essay{padding:40px 0 16px;margin-top:40px}.essay .body{font-size:16px}
+ footer{flex-direction:column;align-items:flex-start}footer .meta{text-align:left}
+ .scale div{font-size:10px}.scale div b{font-size:10.5px}
+}
+html,body{overflow-x:clip}
+.essay code{overflow-wrap:anywhere}
+#chart,#chartAll,#chart .nsewdrag,#chartAll .nsewdrag,#chart .draglayer,#chartAll .draglayer{touch-action:pan-y!important}
+@media(max-width:560px){.eq{font-size:13px;padding:12px 14px}}
 </style></head><body>
 
 <div class="bar"><div class="wrap"><div class="brand">Haze Index<span>Singapore · hourly</span></div>
@@ -164,7 +169,7 @@ footer .meta a{color:var(--ink2);text-decoration:underline;text-decoration-color
   <div>
    <div class="eyebrow">Air quality · Five regions · Updated hourly</div>
    <h1>Singapore hourly PSI</h1>
-   <p class="sub">What the air is like <em>this hour</em>, not the rolling average of the last twenty-four.</p>
+   <p class="sub">What the air is probably like <em>this hour</em>, not the rolling average of the last twenty-four.</p>
    <p class="dek">NEA reports Singapore's PSI as a 24-hour rolling average, the measure used for health advisories. This page is a personal exploration of the same open data hour by hour: it works backwards from the 24-hour figures to estimate an hourly value for each region, updated whenever NEA publishes a new reading.</p>
    <div class="scale" id="scale"></div>
   </div>
@@ -174,8 +179,8 @@ footer .meta a{color:var(--ink2);text-decoration:underline;text-decoration-color
  <div class="sec"><h2>By region</h2><div class="note" id="stamp"></div></div>
  <div class="busy-wrap" id="cardsWrap" data-busy><div class="grid" id="cards"><div class="skel" style="grid-area:north"></div><div class="skel" style="grid-area:west"></div><div class="skel" style="grid-area:central"></div><div class="skel" style="grid-area:east"></div><div class="skel" style="grid-area:south"></div></div></div>
 
- <div class="sec"><h2>The past seven days</h2><div class="note">Select a region</div></div>
- <div class="panel" data-busy>
+ <div class="sec"><h2 id="rangeTitle">The past seven days</h2><div class="seg" id="range"></div></div>
+ <div class="panel" data-busy id="chartPanel">
   <div class="ph"><h3 id="chartTitle">Central</h3><div class="seg" id="seg"></div></div>
   <div class="legend">
    <span><i style="border-color:var(--burgundy)"></i>Hourly estimate (from 24-hour data)</span>
@@ -298,7 +303,7 @@ function busyNote(t){ if(!BUSY_QUIET) setBusy(true,null,t,null); }
 
 const API='https://api-open.data.gov.sg/v2/real-time/api/';
 const REGIONS=['north','west','central','east','south'];
-const DAYS=8, SHOW_H=24*7;
+const DAYS=8; let SHOW_H=24*7;
 let selected='central', MODEL=null;
 const sgDate=off=>new Date(Date.now()+8*3600e3-off*86400e3).toISOString().slice(0,10);
 const sleep=ms=>new Promise(s=>setTimeout(s,ms));
@@ -371,16 +376,24 @@ function renderCards(){
      <dl><dt>NEA 24-hour PSI</dt><dd>${isFinite(z.p24[n-1])?z.p24[n-1]:'—'}</dd>
      <dt>PM2.5, estimated</dt><dd>${z.x25[n-1].toFixed(0)} <span>µg/m³</span></dd>
      <dt>PM2.5, NEA 1-hour</dt><dd>${isFinite(z.pm1[n-1])?z.pm1[n-1]+' <span>µg/m³</span>':'—'}</dd></dl>`;
-    div.onclick=()=>{selected=r;renderCards();renderSeg();renderChart();}; el.appendChild(div); }
+    div.onclick=()=>{selected=r;renderCards();renderSeg();renderChart(); if(isPhone()){ const t=document.getElementById('chartPanel'); if(t&&t.scrollIntoView) t.scrollIntoView({behavior:'smooth',block:'start'}); } }; el.appendChild(div); }
 }
 function renderSeg(){ const el=document.getElementById('seg'); el.innerHTML='';
   for(const r of REGIONS){ const b=document.createElement('button'); b.textContent=r; if(r===selected) b.className='on';
     b.onclick=()=>{selected=r;renderSeg();renderCards();renderChart();}; el.appendChild(b); } }
+
+const RANGES=[[24,'24 h','The past 24 hours'],[72,'3 days','The past three days'],[168,'7 days','The past seven days']];
+function renderRange(){ const el=document.getElementById('range'); if(!el) return; el.innerHTML='';
+  for(const [h,lab,title] of RANGES){ const b=document.createElement('button'); b.textContent=lab; if(h===SHOW_H){ b.className='on'; document.getElementById('rangeTitle').textContent=title; }
+    b.onclick=()=>{ SHOW_H=h; renderRange(); if(MODEL){ renderChart(); renderAll(); } }; el.appendChild(b); } }
+const isPhone=()=>window.innerWidth<560;
+function xFmt(){ return SHOW_H<=24? {tickformat:'%-I %p',hoverformat:'%a %-d %b, %-I %p',nticks:isPhone()?5:8}
+  : {tickformat:isPhone()?'%-d %b':'%a %-d %b',hoverformat:'%a %-d %b, %-I %p',nticks:isPhone()?5:(SHOW_H<=72?7:9)}; }
 const FONT='"Helvetica Neue", Helvetica, Arial, sans-serif';
 const baseLayout=(extra)=>Object.assign({paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
   font:{family:FONT,color:'#4A433B',size:12},margin:{l:40,r:8,t:8,b:34},showlegend:false,
-  xaxis:{type:'date',showgrid:false,linecolor:'#DED5C6',ticks:'outside',tickcolor:'#DED5C6',ticklen:4,tickformat:(window.innerWidth<560?'%-d %b':'%a %-d %b'),nticks:(window.innerWidth<560?5:9),hoverformat:'%a %-d %b, %-I %p'},
-  yaxis:{gridcolor:'#ECE5D9',zeroline:false,tickfont:{color:'#857B6E'}},
+  xaxis:Object.assign({type:'date',showgrid:false,linecolor:'#DED5C6',ticks:'outside',tickcolor:'#DED5C6',ticklen:4,fixedrange:true},xFmt()),dragmode:false,
+  yaxis:{gridcolor:'#ECE5D9',zeroline:false,fixedrange:true,tickfont:{color:'#857B6E'}},
   hovermode:'x unified',hoverlabel:{bgcolor:'#FAF7F1',bordercolor:'#DED5C6',font:{family:FONT,color:'#1E1A16',size:12}}},extra||{});
 function catShapes(ymax){ let lo=0; return CATS.map(c=>{ const s={type:'rect',xref:'paper',x0:0,x1:1,y0:lo,y1:Math.min(c[0],ymax),fillcolor:c[2],opacity:.055,line:{width:0},layer:'below'}; lo=c[0]; return s; }).filter(s=>s.y0<ymax); }
 function catLabels(ymax){ let lo=0; return CATS.map(c=>{ const top=Math.min(c[0],ymax), a={xref:'paper',x:1,xanchor:'right',y:(lo+top)/2,yanchor:'middle',text:c[1].toUpperCase(),showarrow:false,font:{family:FONT,size:9.5,color:c[3]},opacity:.75}; const ok=lo<ymax&&top-lo>18; lo=c[0]; return ok?a:null; }).filter(Boolean); }
@@ -394,13 +407,13 @@ function renderChart(){
    {x:X,y:sl(z.ref),mode:'lines',line:{color:'#4A433B',width:1.1,dash:'dot'},name:'NEA 1-h PM2.5 (PSI scale)',hovertemplate:'%{y:.0f}'},
    {x:X,y:sl(z.p24),mode:'lines',line:{color:'#6E8DAE',width:3,shape:'spline'},name:'NEA 24-h PSI',hovertemplate:'%{y:.0f}'},
    {x:X,y:sl(z.h),mode:'lines',line:{color:'#7E2A35',width:2},name:'Hourly estimate',hovertemplate:'<b>%{y:.0f}</b>'}],
-   baseLayout({shapes:catShapes(ymax),annotations:catLabels(ymax),yaxis:{gridcolor:'#ECE5D9',zeroline:false,range:[0,ymax],tickfont:{color:'#857B6E'}}}),{displayModeBar:false,responsive:true});
+   baseLayout({shapes:catShapes(ymax),annotations:catLabels(ymax),yaxis:{gridcolor:'#ECE5D9',zeroline:false,fixedrange:true,range:[0,ymax],tickfont:{color:'#857B6E'}}}),{displayModeBar:false,responsive:true,scrollZoom:false,doubleClick:false,showTips:false,staticPlot:false});
 }
 function renderAll(){
   const {grid,Z}=MODEL, n=grid.length, s=Math.max(0,n-SHOW_H), X=grid.slice(s).map(t=>new Date(t));
   document.getElementById('zleg').innerHTML=REGIONS.map(r=>`<span style="text-transform:capitalize"><i style="border-color:${ZCOL[r]}"></i>${r}</span>`).join('');
   Plotly.react('chartAll',REGIONS.map(r=>({x:X,y:Z[r].h.slice(s),mode:'lines',name:cap(r),line:{color:ZCOL[r],width:r===selected?2.2:1.4},hovertemplate:'%{y:.0f}'})),
-   baseLayout(),{displayModeBar:false,responsive:true});
+   baseLayout(),{displayModeBar:false,responsive:true,scrollZoom:false,doubleClick:false,showTips:false,staticPlot:false});
 }
 let lastStamp=null;
 async function refresh(force){
@@ -418,10 +431,11 @@ async function refresh(force){
 }
 let busy=false, lastRun=0;
 async function tick(force){ if(busy) return; busy=true; try{ await refresh(force); lastRun=Date.now(); } finally{ busy=false; } }
-renderScale(); setBusy(true,'Connecting to NEA','Loading the last 8 days of readings',0); tick(true); setInterval(()=>tick(false),10*60*1000);
+renderScale(); renderRange(); setBusy(true,'Connecting to NEA','Loading the last 8 days of readings',0); tick(true); setInterval(()=>tick(false),10*60*1000);
 document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible' && Date.now()-lastRun>5*60*1000) tick(false); });
 window.addEventListener('pageshow',e=>{ if(e.persisted) tick(false); });
 // re-layout charts on rotation
-window.addEventListener('orientationchange',()=>setTimeout(()=>{ if(MODEL){ Plotly.Plots.resize('chart'); Plotly.Plots.resize('chartAll'); } },300));
+let rsT=null, lastW=window.innerWidth; const onRs=()=>{ clearTimeout(rsT); rsT=setTimeout(()=>{ if(MODEL && Math.abs(window.innerWidth-lastW)>40){ lastW=window.innerWidth; renderChart(); renderAll(); } },250); };
+window.addEventListener('resize',onRs); window.addEventListener('orientationchange',onRs);
 
 </script></body></html>
