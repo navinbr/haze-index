@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F3EEE5">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Haze Index">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="Estimated hourly PSI for Singapore's five regions, deconvolved from NEA's 24-hour rolling PSI.">
+<meta name="author" content="Navin B Ramakrishna">
+<link rel="apple-touch-icon" href="data:image/png;base64,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"><link rel="icon" type="image/png" href="data:image/png;base64,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">
+<title>Singapore hourly PSI — Haze Index</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+:root{
+ --bg:#F3EEE5; --paper:#FAF7F1; --ink:#1E1A16; --ink2:#4A433B; --mut:#857B6E; --rule:#DED5C6; --rule2:#E9E2D6;
+ --teal:#2E7470; --mustard:#C2961F; --rust:#B4532A; --burgundy:#7E2A35; --plum:#4B2142;
+ --dblue:#6E8DAE; --dpink:#D4A3A6; --sand:#E6DCCB;
+ --hn:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--hn);font-weight:400;font-size:16px;line-height:1.5}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 max(32px,env(safe-area-inset-right)) 0 max(32px,env(safe-area-inset-left))}
+body{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+/* top bar */
+.bar{border-bottom:1px solid var(--rule)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{font-weight:500;font-size:15px;letter-spacing:-.01em}
+.brand span{color:var(--mut);font-weight:300;margin-left:8px}
+.live{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink2);font-weight:400}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--rust);box-shadow:0 0 0 0 rgba(180,83,42,.5);animation:pulse 2.4s infinite}
+.dot.idle{background:var(--mut);animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(180,83,42,.45)}70%{box-shadow:0 0 0 9px rgba(180,83,42,0)}100%{box-shadow:0 0 0 0 rgba(180,83,42,0)}}
+/* hero */
+.hero{padding:64px 0 36px;display:grid;grid-template-columns:1.35fr 1fr;gap:56px;align-items:end;border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:18px}
+h1{font-weight:500;font-size:clamp(38px,5.2vw,64px);line-height:1.02;letter-spacing:-.035em;margin:0}
+h1 em{font-style:normal;color:var(--burgundy)}
+.sub{font-style:italic;font-weight:300;font-size:clamp(19px,2vw,23px);line-height:1.4;letter-spacing:-.01em;color:var(--ink2);margin:16px 0 0;max-width:30em}
+.dek{font-weight:300;font-size:17px;line-height:1.55;color:var(--mut);margin:18px 0 0;max-width:36em}
+.lede{border-left:1px solid var(--rule);padding-left:28px}
+.lede .k{font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.lede .big{font-weight:500;font-size:88px;line-height:.95;letter-spacing:-.045em;margin:10px 0 6px}
+.lede .big small{font-size:22px;letter-spacing:-.01em;font-weight:400;color:var(--mut);margin-left:6px}
+.lede p{font-weight:300;font-size:16px;color:var(--ink2);margin:8px 0 0;max-width:24em}
+.lede p b{font-weight:500;color:var(--ink)}
+/* scale */
+.scale{display:flex;gap:2px;margin:28px 0 0;max-width:520px}
+.scale div{flex:1;font-size:11px;color:var(--ink2);font-weight:400}
+.scale div i{display:block;height:4px;border-radius:2px;margin-bottom:7px}
+.scale div b{font-weight:500;color:var(--ink);display:block;font-size:11.5px}
+/* section headers */
+.sec{padding:48px 0 8px;display:flex;align-items:baseline;justify-content:space-between;gap:20px}
+.sec h2{font-weight:500;font-size:26px;letter-spacing:-.02em;margin:0}
+.sec .note{font-size:13px;color:var(--mut);font-weight:300}
+/* zone grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-areas:". north ." "west central east" ". south .";gap:14px;margin-top:18px}
+.card{background:var(--paper);border:1px solid var(--rule2);border-radius:14px;padding:20px 22px 18px;position:relative;cursor:pointer;
+ transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;overflow:hidden}
+.card:before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--c)}
+.card:hover{transform:translateY(-2px);box-shadow:0 10px 30px -18px rgba(60,40,20,.35)}
+.card.sel{border-color:var(--ink2)}
+.card .top{display:flex;justify-content:space-between;align-items:center}
+.card .zone{font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.chip{font-size:11.5px;font-weight:500;padding:3px 10px 3px 9px;border-radius:999px;background:rgba(120,90,60,.08);background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--cd);display:inline-flex;align-items:center;gap:6px}
+.chip:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--c)}
+.card .num{display:flex;align-items:baseline;gap:10px;margin:14px 0 2px}
+.card .big{font-weight:500;font-size:60px;line-height:1;letter-spacing:-.045em}
+.card .delta{font-size:13px;font-weight:500;color:var(--mut)}
+.card .delta.up{color:var(--rust)}.card .delta.dn{color:var(--teal)}
+.card .sub{font-size:12.5px;color:var(--mut);font-weight:300}
+.card dl{display:grid;grid-template-columns:1fr auto;gap:5px 12px;margin:16px 0 0;padding-top:13px;border-top:1px solid var(--rule2);font-size:13px}
+.card dt{color:var(--ink2);font-weight:300}.card dd{margin:0;font-weight:500;font-variant-numeric:tabular-nums;text-align:right}
+.card dd span{color:var(--mut);font-weight:300}
+/* panels */
+.panel{background:var(--paper);border:1px solid var(--rule2);border-radius:16px;padding:22px 24px 14px;margin-top:18px}
+.seg{display:inline-flex;background:var(--sand);border-radius:999px;padding:3px;gap:2px}
+.seg button{font-family:var(--hn);font-size:13px;font-weight:400;border:0;background:transparent;color:var(--ink2);padding:6px 14px;border-radius:999px;cursor:pointer;text-transform:capitalize;transition:background .15s}
+.seg button.on{background:var(--paper);color:var(--ink);font-weight:500;box-shadow:0 1px 2px rgba(60,40,20,.12)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:12.5px;color:var(--ink2);margin:14px 0 4px;font-weight:300}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{display:inline-block;width:18px;height:0;border-top:2px solid}
+.ph{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.ph h3{margin:0;font-weight:500;font-size:17px;letter-spacing:-.01em}
+/* essay */
+.essay{display:grid;grid-template-columns:220px 1fr;gap:56px;padding:56px 0 24px;border-top:1px solid var(--rule);margin-top:56px}
+.essay aside{font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);position:sticky;top:24px;align-self:start}
+.essay .body{max-width:680px;font-size:17px;line-height:1.65;color:var(--ink2);font-weight:300}
+.essay h4{font-weight:500;color:var(--ink);font-size:20px;letter-spacing:-.015em;margin:34px 0 8px}
+.essay h4:first-child{margin-top:0}
+.essay b{font-weight:500;color:var(--ink)}
+.essay code{font-family:"SF Mono",Menlo,monospace;font-size:13.5px;background:var(--sand);padding:1px 6px;border-radius:5px;color:var(--ink)}
+.eq{background:var(--paper);border:1px solid var(--rule2);border-radius:12px;padding:16px 20px;font-size:15px;color:var(--ink);margin:14px 0;font-weight:400}
+table.vt{border-collapse:collapse;width:100%;margin:16px 0;font-size:14.5px}
+.vt th{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);text-align:left;padding:8px 0;border-bottom:1px solid var(--ink2)}
+.vt td{padding:10px 0;border-bottom:1px solid var(--rule);color:var(--ink2)}
+.vt td:nth-child(n+2),.vt th:nth-child(n+2){text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500}
+.vt tr.hl td{color:var(--burgundy)}
+footer{border-top:1px solid var(--rule);margin-top:48px;padding:30px 0 calc(48px + env(safe-area-inset-bottom));font-size:12.5px;color:var(--mut);font-weight:300;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+footer .credit{display:flex;align-items:flex-start;gap:14px}
+footer .avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none;margin-top:2px;filter:saturate(.85);box-shadow:0 0 0 1px var(--rule)}
+footer .who{font-weight:500;font-size:17px;letter-spacing:-.015em;color:var(--ink)}
+footer .handle{display:inline-block;margin-top:3px;font-size:14px;font-weight:400;color:var(--burgundy);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--burgundy) 30%,transparent)}
+footer .handle:hover{border-bottom-color:var(--burgundy)}
+footer .pc{margin-top:4px;font-size:12.5px;font-weight:300;color:var(--mut)}
+footer .co{margin-top:10px;font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+footer .meta{text-align:right;line-height:1.7;max-width:560px}
+footer .meta>div+div{margin-top:6px}
+footer .meta a{color:var(--ink2);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:2px}
+.err{color:var(--rust);font-weight:500}
+@media(max-width:560px){
+ .wrap{padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left))}
+ .bar .wrap{height:52px}.brand span{display:none}.live{font-size:12px}
+ .hero{padding:40px 0 28px}.dek{font-size:17px}.lede .big{font-size:72px}
+ .grid{grid-template-columns:1fr;grid-template-areas:"central" "north" "east" "west" "south";gap:10px}
+ .card{padding:16px 18px 14px}.card .big{font-size:52px}.card:hover{transform:none;box-shadow:none}
+ .sec{padding:36px 0 4px;flex-direction:column;gap:4px}.sec h2{font-size:22px}
+ .panel{padding:16px 14px 8px;border-radius:14px}.ph{flex-direction:column;align-items:flex-start}
+ .seg{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.seg button{padding:6px 11px}
+ #chart{height:340px!important}#chartAll{height:240px!important}
+ .essay{padding:40px 0 16px;margin-top:40px}.essay .body{font-size:16px}
+ footer{flex-direction:column;align-items:flex-start}footer .meta{text-align:left}
+ .scale div{font-size:10px}.scale div b{font-size:10.5px}
+}
+@media(max-width:860px){.hero{grid-template-columns:1fr;gap:32px}.lede{border-left:0;padding-left:0;border-top:1px solid var(--rule);padding-top:24px}
+ .grid{grid-template-columns:1fr 1fr;grid-template-areas:"north north" "west east" "central central" "south south"}
+ .essay{grid-template-columns:1fr;gap:16px}.essay aside{position:static}.wrap{padding:0 20px}}
+</style></head><body>
+
+<div class="bar"><div class="wrap"><div class="brand">Haze Index<span>Singapore · hourly</span></div>
+ <div class="live"><i class="dot idle" id="dot"></i><span id="status">Connecting to NEA…</span></div></div></div>
+<div class="wrap">
+ <section class="hero">
+  <div>
+   <div class="eyebrow">Air quality · Five regions · Updated hourly</div>
+   <h1>Singapore hourly PSI</h1>
+   <p class="sub">An unofficial dashboard for the air this hour, rather than the last twenty-four.</p>
+   <p class="dek">Singapore's official PSI is a 24-hour rolling average. This page inverts that average to recover an estimated hourly PSI for each region, recomputed every time NEA publishes a new reading.</p>
+   <div class="scale" id="scale"></div>
+  </div>
+  <div class="lede" id="lede"><div class="k">Highest hourly PSI now</div><div class="big">—</div><p>Loading…</p></div>
+ </section>
+
+ <div class="sec"><h2>By region</h2><div class="note" id="stamp"></div></div>
+ <div class="grid" id="cards"></div>
+
+ <div class="sec"><h2>The past seven days</h2><div class="note">Select a region</div></div>
+ <div class="panel">
+  <div class="ph"><h3 id="chartTitle">Central</h3><div class="seg" id="seg"></div></div>
+  <div class="legend">
+   <span><i style="border-color:var(--burgundy)"></i>Deconvolved hourly PSI</span>
+   <span><i style="border-color:var(--dpink);border-top-width:8px;opacity:.6"></i>±1σ uncertainty</span>
+   <span><i style="border-color:var(--dblue);border-top-width:3px"></i>NEA 24-hour PSI (published)</span>
+   <span><i style="border-color:var(--ink2);border-top-style:dotted"></i>NEA 1-hour PM2.5, on PSI scale</span>
+  </div>
+  <div id="chart" style="height:420px"></div>
+ </div>
+ <div class="panel">
+  <div class="ph"><h3>All regions, deconvolved hourly PSI</h3><div class="legend" id="zleg" style="margin:0"></div></div>
+  <div id="chartAll" style="height:280px"></div>
+ </div>
+
+ <section class="essay">
+  <aside>Method &amp; validation</aside>
+  <div class="body">
+   <h4>Why invert the average?</h4>
+   <p>NEA's 24-hour PSI is the right number for health advisories, which are based on day-long exposure. But it lags: when a plume arrives, the 24-hour figure takes most of a day to catch up, and it understates short peaks. NEA does publish hourly PM2.5 concentrations, but not on the PSI scale people know.</p>
+   <h4>The forward model</h4>
+   <p>Each region's 24-hour PM2.5 is exactly the trailing mean of the last 24 hourly readings, rounded to a whole number — we verified this against NEA's own hourly series to within ±0.25 µg/m³. The PSI is then a piecewise-linear function of that concentration. So we invert <b>concentrations</b>, then rescale to PSI.</p>
+   <h4>Why algebra alone fails</h4>
+   <p>In principle <code>x(t) = x(t−24) + 24·[m(t) − m(t−1)]</code> recovers every hour. In practice NEA rounds to integers, and that rounding is multiplied by 24 at every step and compounds day after day: from a perfect start, the error reaches ~30 µg/m³ within a week. A 24-hour mean is also blind to any pattern that repeats exactly every 24 hours.</p>
+   <h4>The inversion</h4>
+   <p>For each region we solve, over the last eight days,</p>
+   <div class="eq">minimise &nbsp;λ·Σ|x<sub>t</sub> − x<sub>t−1</sub>| &nbsp;+&nbsp; μ·Σ max(0, |mean<sub>24</sub>(x)<sub>t</sub> − m<sub>t</sub>| − 0.5) &nbsp; subject to &nbsp;x ≥ 0</div>
+   <p>— the gentlest hourly series consistent with every published value to within rounding (λ = 1, μ = 50), solved in your browser with a pre-conditioned Chambolle–Pock algorithm. The newest hour averages this with a closure estimate, <code>24·m(T) − Σ x̂(T−k)</code>, which reduces lag on rising haze. Hourly PSI is the maximum of the deconvolved PM2.5 and PM10 sub-indices and NEA's published O₃, CO and SO₂ sub-indices.</p>
+   <h4>How well it works</h4>
+   <p>Scored against NEA's hourly PM2.5 on the PSI scale, five regions, 20 Sep – 15 Oct 2026:</p>
+   <table class="vt"><tr><th>Estimate</th><th>RMSE, PSI</th><th>Correlation</th></tr>
+ <tr><td>Published 24-h value used as "the hourly value"</td><td>25.9</td><td>–</td></tr>
+ <tr class="hl"><td>Deconvolved, real-time (newest hour, as shown in cards)</td><td>11.8</td><td>0.96</td></tr>
+ <tr><td>Deconvolved, revised 3 h later</td><td>10.2</td><td>0.97</td></tr>
+ <tr><td>Deconvolved, retrospective (full window)</td><td>8.6</td><td>0.98</td></tr></table>
+   <p>Daily peak hourly PSI (n = 120 zone-days): the published 24-h PSI under-states the true daily peak by 27 PSI on average; the real-time deconvolution by 3 (mean absolute error 8). The shaded band is is ±1σ from an empirical error model, σ(µg/m³) ≈ 5.5 + 0.074·x̂ (newest hour) to 4.3 + 0.073·x̂ (≥3 h old).</p>
+   <h4>Caveats</h4>
+   <p>An hourly PSI is an informational rescaling of hourly concentration, not an official index; NEA's health advisories are tied to the 24-hour PSI. The PM10 inversion has no hourly ground truth. Sharp rises are under-estimated by roughly 10–20% in the newest hour and revised within about three hours. Not for medical or operational decisions.</p>
+  </div>
+ </section>
+ <footer>
+  <div class="credit"><img class="avatar" src="data:image/jpeg;base64,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" alt="Navin B Ramakrishna" width="40" height="40">
+   <div><div class="who">Navin B Ramakrishna</div>
+   <a class="handle" href="https://x.com/navinbrian" target="_blank" rel="noopener">@navinbrian</a>
+   <div class="pc">In a personal capacity</div>
+   <div class="co">Co-developed with Claude Science</div></div></div>
+  <div class="meta">
+   <div>Contains information from NEA's real-time PSI and PM2.5 datasets, accessed live from <a href="https://data.gov.sg" target="_blank" rel="noopener">data.gov.sg</a>,<br>made available under the terms of the <a href="https://data.gov.sg/open-data-licence" target="_blank" rel="noopener">Singapore Open Data Licence version 1.0</a>.</div>
+   <div>Independent project, made in a personal capacity; views and methods are the author's own and do not represent any employer or institution. Not affiliated with or endorsed by NEA or the Singapore Government. Hourly values are model estimates, not official readings.</div>
+   <div id="foot">Refreshes automatically every 10 minutes</div></div>
+ </footer>
+</div>
+
+<script id="solver">
+// ---------- PSI breakpoints (Singapore NEA) ----------
+const PSI_BP=[0,50,100,200,300,400,500];
+const BP={pm25:[0,12,55,150,250,350,500],pm10:[0,50,150,350,420,500,600]};
+function interp(c,bp){ if(!isFinite(c)) return NaN; c=Math.max(0,c);
+  for(let i=1;i<bp.length;i++) if(c<=bp[i]) return PSI_BP[i-1]+(c-bp[i-1])*(PSI_BP[i]-PSI_BP[i-1])/(bp[i]-bp[i-1]);
+  const n=bp.length; return PSI_BP[n-2]+(c-bp[n-2])*(PSI_BP[n-1]-PSI_BP[n-2])/(bp[n-1]-bp[n-2]); }
+// ---------- TV deconvolution of a trailing L-hour mean (Chambolle-Pock, diag. preconditioned) ----------
+// m: array of n published 24-h means (NaN = missing). Returns x of length n (hour t aligned with m[t]),
+// plus the 23 pre-window hours in .pre
+function deconvTV(m,opt={}){
+  const L=opt.L||24, lam=opt.lam??1.0, mu=opt.mu??50, tol=opt.tol??0.5, iters=opt.iters||2000;
+  const n=m.length, N=n+L-1, ok=m.map(v=>isFinite(v));
+  let first=m.find(v=>isFinite(v)); if(first===undefined) return null;
+  // fill-in for initialisation only
+  const mf=new Float64Array(n); let last=first; for(let i=0;i<n;i++){ if(ok[i]) last=m[i]; mf[i]=last; }
+  const tau=new Float64Array(N); for(let j=0;j<N;j++){ let c=0; if(j<N-1)c+=1; if(j>0)c+=1;
+    let cnt=0; for(let i=Math.max(0,j-L+1);i<=Math.min(n-1,j);i++) cnt++; c+=cnt/L; tau[j]=1/c; }
+  const sD=0.5, sA=1.0, t=1/sA;
+  let x=new Float64Array(N), xb=new Float64Array(N);
+  for(let j=0;j<N;j++){ x[j]= j<L-1? mf[0] : mf[j-L+1]; xb[j]=x[j]; }
+  const yD=new Float64Array(N-1), yA=new Float64Array(n), KTy=new Float64Array(N), cs=new Float64Array(N+1);
+  for(let k=0;k<iters;k++){
+    for(let j=0;j<N-1;j++){ let v=yD[j]+sD*(xb[j+1]-xb[j]); yD[j]= v>lam?lam:(v<-lam?-lam:v); }
+    cs[0]=0; for(let j=0;j<N;j++) cs[j+1]=cs[j]+xb[j];
+    for(let i=0;i<n;i++){ if(!ok[i]){ yA[i]=0; continue; }
+      const Ax=(cs[i+L]-cs[i])/L, v=yA[i]+sA*Ax, u=v/sA-m[i], au=Math.abs(u), s=Math.sign(u);
+      const P= au<=tol? u : (au<=tol+t*mu? s*tol : u-s*t*mu);
+      yA[i]=v-sA*(m[i]+P); }
+    KTy.fill(0); for(let j=0;j<N-1;j++){ KTy[j]-=yD[j]; KTy[j+1]+=yD[j]; }
+    // A^T yA : column j gets sum_{i=j-L+1..j} yA[i] / L
+    cs[0]=0; for(let i=0;i<n;i++) cs[i+1]=cs[i]+yA[i];
+    for(let j=0;j<N;j++){ const lo=Math.max(0,j-L+1), hi=Math.min(n-1,j); if(hi>=lo) KTy[j]+=(cs[hi+1]-cs[lo])/L; }
+    for(let j=0;j<N;j++){ const xn=Math.max(0,x[j]-tau[j]*KTy[j]); xb[j]=2*xn-x[j]; x[j]=xn; }
+  }
+  const out=Array.from(x.slice(L-1)); out.pre=Array.from(x.slice(0,L-1));
+  // edge blend: closure estimate for the newest hour
+  if(ok[n-1]){ let s=0; for(let k=1;k<L;k++) s+=x[N-1-k]; const close=Math.max(0,L*m[n-1]-s);
+    out.tv_last=out[n-1]; out.close_last=close; out[n-1]=0.5*out[n-1]+0.5*close; }
+  return out;
+}
+function sigmaUG(xhat,lag){ // empirical 1-sigma error (ug/m3), lag in hours from newest
+  const a0=5.53,b0=0.074,a3=4.28,b3=0.073, f=Math.min(lag,3)/3;
+  return (a0+(a3-a0)*f)+(b0+(b3-b0)*f)*Math.max(0,xhat); }
+if(typeof module!=='undefined') module.exports={deconvTV,interp,BP,sigmaUG};
+</script>
+<script>
+const API='https://api-open.data.gov.sg/v2/real-time/api/';
+const REGIONS=['north','west','central','east','south'];
+const DAYS=8, SHOW_H=24*7;
+let selected='central', MODEL=null;
+const sgDate=off=>new Date(Date.now()+8*3600e3-off*86400e3).toISOString().slice(0,10);
+const sleep=ms=>new Promise(s=>setTimeout(s,ms));
+let lastCall=0;
+async function getJSON(url){ // data.gov.sg free tier: bursts are throttled ("try again in 10 seconds")
+  for(let a=0;a<6;a++){
+    const wait=lastCall+1200-Date.now(); if(wait>0) await sleep(wait); lastCall=Date.now();
+    let j=null, status=0;
+    try{ const r=await fetch(url); status=r.status; j=await r.json().catch(()=>null); }catch(e){ if(a===5) throw e; await sleep(3000); continue; }
+    if(j && j.code===0 && j.data) return j.data.items||[];
+    if(status===429 || (j && (j.code===24 || /rate limit/i.test(j.errorMsg||'')))){ setStatus(`NEA API rate limit — waiting 11 s (attempt ${a+1}/6)…`); await sleep(11000); continue; }
+    if(a===5) throw new Error('HTTP '+status+' '+((j&&j.errorMsg)||'')); await sleep(3000);
+  }
+  throw new Error('rate limited'); }
+const setStatus=t=>{ const el=document.getElementById('status'); if(el) el.innerHTML=t; };
+async function fetchDay(ep,date){ const key='sgpsi_'+ep+'_'+date, frozen=date<sgDate(1);
+  if(frozen){ const c=localStorage.getItem(key); if(c) return JSON.parse(c); }
+  const items=await getJSON(API+ep+'?date='+date);
+  if(frozen && items && items.length>=24) try{ localStorage.setItem(key,JSON.stringify(items)); }catch(e){}
+  return items||[]; }
+async function loadData(){
+  const dates=[...Array(DAYS).keys()].map(i=>sgDate(DAYS-1-i)); const rec={};
+  let k=0; for(const d of dates){ for(const ep of ['psi','pm25']){ setStatus(`Fetching NEA data ${++k}/${dates.length*2}…`); const items=await fetchDay(ep,d);
+    for(const it of items){ const t=Date.parse(it.timestamp); rec[t]=rec[t]||{}; Object.assign(rec[t],it.readings); } } }
+  const ts=Object.keys(rec).map(Number).sort((a,b)=>a-b); const t0=ts[0], t1=ts[ts.length-1];
+  const grid=[]; for(let t=t0;t<=t1;t+=3600e3) grid.push(t);
+  return {grid, rec};
+}
+async function compute({grid,rec}){
+  const get=(t,v,r)=>{ const o=rec[t]; return o&&o[v]&&o[v][r]!=null? +o[v][r] : NaN; };
+  const n=grid.length, Z={};
+  for(const r of REGIONS){ await new Promise(s=>setTimeout(s,0));
+    const m25=grid.map(t=>get(t,'pm25_twenty_four_hourly',r)), m10=grid.map(t=>get(t,'pm10_twenty_four_hourly',r));
+    const x25=deconvTV(m25), x10=deconvTV(m10);
+    const oth=grid.map(t=>Math.max(...['o3_sub_index','co_sub_index','so2_sub_index'].map(v=>get(t,v,r)).filter(isFinite),0));
+    const h=[],lo=[],hi=[],drv=[],ref=[],p24=[],ps25=[];
+    for(let i=0;i<n;i++){ const lag=n-1-i, s25=interp(x25[i],BP.pm25), s10=interp(x10[i],BP.pm10), o=oth[i];
+      const best=Math.max(s25,s10,o); h.push(best); drv.push(best===s25?'PM2.5':best===s10?'PM10':'O₃/CO/SO₂'); ps25.push(s25);
+      const sg=sigmaUG(x25[i],lag); lo.push(Math.max(interp(x25[i]-sg,BP.pm25),s10,o)); hi.push(Math.max(interp(x25[i]+sg,BP.pm25),s10,o));
+      ref.push(interp(get(grid[i],'pm25_one_hourly',r),BP.pm25)); p24.push(get(grid[i],'psi_twenty_four_hourly',r)); }
+    Z[r]={x25,x10,h,lo,hi,drv,ref,p24,ps25,pm1:grid.map(t=>get(t,'pm25_one_hourly',r)),m25};
+  }
+  return {grid,Z};
+}
+
+
+const CATS=[[50,'Good','#2E7470','#1F5552'],[100,'Moderate','#C2961F','#7A5C0E'],[200,'Unhealthy','#B4532A','#8A3B1A'],[300,'Very unhealthy','#7E2A35','#7E2A35'],[1e9,'Hazardous','#4B2142','#4B2142']];
+const cat=p=>CATS.find(c=>p<=c[0]);
+const ZCOL={north:'#2E7470',south:'#C2961F',east:'#6E8DAE',west:'#D08A8F',central:'#7E2A35'};
+const cap=s=>s[0].toUpperCase()+s.slice(1);
+const fmtT=t=>new Date(t).toLocaleString('en-SG',{timeZone:'Asia/Singapore',weekday:'short',day:'numeric',month:'short',hour:'numeric',hour12:true});
+function renderScale(){ const el=document.getElementById('scale'); let lo=0;
+  el.innerHTML=CATS.map(c=>{const s=`<div><i style="background:${c[2]}"></i><b>${c[1]}</b>${c[0]<1e9?lo+'–'+c[0]:'>300'}</div>`; lo=c[0]+1; return s;}).join(''); }
+function renderLede(){ const {grid,Z}=MODEL,n=grid.length; let best=null;
+  for(const r of REGIONS){ const z=Z[r]; if(!best||z.h[n-1]>Z[best].h[n-1]) best=r; }
+  const z=Z[best], v=Math.round(z.h[n-1]), p=z.p24[n-1], c=cat(v), gap=v-p;
+  document.getElementById('lede').innerHTML=`<div class="k">Highest hourly PSI now</div>
+   <div class="big" style="color:${c[3]}">${v}<small>${cap(best)}</small></div>
+   <p>The published 24-hour PSI for ${cap(best)} reads <b>${isFinite(p)?p:'—'}</b>${isFinite(p)?` — ${gap>=0?'<b>'+gap+' points below</b>':'<b>'+(-gap)+' points above</b>'} the estimated air this hour.`:'.'} Air quality is <b style="color:${c[3]}">${c[1].toLowerCase()}</b>.</p>`; }
+function renderCards(){
+  const {grid,Z}=MODEL, n=grid.length, el=document.getElementById('cards'); el.innerHTML='';
+  document.getElementById('stamp').textContent='Reading for '+fmtT(grid[n-1])+' SGT';
+  for(const r of REGIONS){ const z=Z[r], v=z.h[n-1], c=cat(v), d3=Math.round(v-z.h[n-4]);
+    const div=document.createElement('div'); div.className='card'+(r===selected?' sel':''); div.style.gridArea=r;
+    div.style.setProperty('--c',c[2]); div.style.setProperty('--cd',c[3]);
+    div.innerHTML=`<div class="top"><span class="zone">${r}</span><span class="chip">${c[1]}</span></div>
+     <div class="num"><span class="big">${Math.round(v)}</span><span class="delta ${d3>0?'up':d3<0?'dn':''}">${d3>0?'↑':d3<0?'↓':'→'} ${Math.abs(d3)} in 3 h</span></div>
+     <div class="sub">Hourly PSI · range ${Math.round(z.lo[n-1])}–${Math.round(z.hi[n-1])} · driven by ${z.drv[n-1]}</div>
+     <dl><dt>NEA 24-hour PSI</dt><dd>${isFinite(z.p24[n-1])?z.p24[n-1]:'—'}</dd>
+     <dt>PM2.5, deconvolved</dt><dd>${z.x25[n-1].toFixed(0)} <span>µg/m³</span></dd>
+     <dt>PM2.5, NEA 1-hour</dt><dd>${isFinite(z.pm1[n-1])?z.pm1[n-1]+' <span>µg/m³</span>':'—'}</dd></dl>`;
+    div.onclick=()=>{selected=r;renderCards();renderSeg();renderChart();}; el.appendChild(div); }
+}
+function renderSeg(){ const el=document.getElementById('seg'); el.innerHTML='';
+  for(const r of REGIONS){ const b=document.createElement('button'); b.textContent=r; if(r===selected) b.className='on';
+    b.onclick=()=>{selected=r;renderSeg();renderCards();renderChart();}; el.appendChild(b); } }
+const FONT='"Helvetica Neue", Helvetica, Arial, sans-serif';
+const baseLayout=(extra)=>Object.assign({paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
+  font:{family:FONT,color:'#4A433B',size:12},margin:{l:40,r:8,t:8,b:34},showlegend:false,
+  xaxis:{type:'date',showgrid:false,linecolor:'#DED5C6',ticks:'outside',tickcolor:'#DED5C6',ticklen:4,tickformat:(window.innerWidth<560?'%-d %b':'%a %-d %b'),nticks:(window.innerWidth<560?5:9),hoverformat:'%a %-d %b, %-I %p'},
+  yaxis:{gridcolor:'#ECE5D9',zeroline:false,tickfont:{color:'#857B6E'}},
+  hovermode:'x unified',hoverlabel:{bgcolor:'#FAF7F1',bordercolor:'#DED5C6',font:{family:FONT,color:'#1E1A16',size:12}}},extra||{});
+function catShapes(ymax){ let lo=0; return CATS.map(c=>{ const s={type:'rect',xref:'paper',x0:0,x1:1,y0:lo,y1:Math.min(c[0],ymax),fillcolor:c[2],opacity:.055,line:{width:0},layer:'below'}; lo=c[0]; return s; }).filter(s=>s.y0<ymax); }
+function catLabels(ymax){ let lo=0; return CATS.map(c=>{ const top=Math.min(c[0],ymax), a={xref:'paper',x:1,xanchor:'right',y:(lo+top)/2,yanchor:'middle',text:c[1].toUpperCase(),showarrow:false,font:{family:FONT,size:9.5,color:c[3]},opacity:.75}; const ok=lo<ymax&&top-lo>18; lo=c[0]; return ok?a:null; }).filter(Boolean); }
+function renderChart(){
+  const {grid,Z}=MODEL, z=Z[selected], n=grid.length, s=Math.max(0,n-SHOW_H), X=grid.slice(s).map(t=>new Date(t));
+  const sl=a=>a.slice(s); const ymax=Math.ceil(Math.max(...sl(z.hi),...sl(z.ref).filter(isFinite),...sl(z.p24).filter(isFinite))*1.08/25)*25;
+  document.getElementById('chartTitle').textContent=cap(selected);
+  Plotly.react('chart',[
+   {x:X,y:sl(z.hi),mode:'lines',line:{width:0},hoverinfo:'skip'},
+   {x:X,y:sl(z.lo),mode:'lines',line:{width:0},fill:'tonexty',fillcolor:'rgba(212,163,166,.38)',hoverinfo:'skip'},
+   {x:X,y:sl(z.ref),mode:'lines',line:{color:'#4A433B',width:1.1,dash:'dot'},name:'NEA 1-h PM2.5 (PSI scale)',hovertemplate:'%{y:.0f}'},
+   {x:X,y:sl(z.p24),mode:'lines',line:{color:'#6E8DAE',width:3,shape:'spline'},name:'NEA 24-h PSI',hovertemplate:'%{y:.0f}'},
+   {x:X,y:sl(z.h),mode:'lines',line:{color:'#7E2A35',width:2},name:'Deconvolved hourly',hovertemplate:'<b>%{y:.0f}</b>'}],
+   baseLayout({shapes:catShapes(ymax),annotations:catLabels(ymax),yaxis:{gridcolor:'#ECE5D9',zeroline:false,range:[0,ymax],tickfont:{color:'#857B6E'}}}),{displayModeBar:false,responsive:true});
+}
+function renderAll(){
+  const {grid,Z}=MODEL, n=grid.length, s=Math.max(0,n-SHOW_H), X=grid.slice(s).map(t=>new Date(t));
+  document.getElementById('zleg').innerHTML=REGIONS.map(r=>`<span style="text-transform:capitalize"><i style="border-color:${ZCOL[r]}"></i>${r}</span>`).join('');
+  Plotly.react('chartAll',REGIONS.map(r=>({x:X,y:Z[r].h.slice(s),mode:'lines',name:cap(r),line:{color:ZCOL[r],width:r===selected?2.2:1.4},hovertemplate:'%{y:.0f}'})),
+   baseLayout(),{displayModeBar:false,responsive:true});
+}
+let lastStamp=null;
+async function refresh(force){
+  const dot=document.getElementById('dot');
+  try{ const raw=await loadData(); const stamp=raw.grid[raw.grid.length-1];
+    if(force||stamp!==lastStamp){ setStatus('Computing hourly estimates…'); MODEL=await compute(raw); lastStamp=stamp; renderLede(); renderCards(); renderSeg(); renderChart(); renderAll(); }
+    dot.className='dot'; setStatus(`Live · ${fmtT(stamp)} reading`);
+    document.getElementById('foot').textContent='Last checked '+new Date().toLocaleTimeString('en-SG',{timeZone:'Asia/Singapore',hour:'numeric',minute:'2-digit'})+' SGT · refreshes every 10 minutes';
+  }catch(e){ dot.className='dot idle'; setStatus(`<span class="err">Couldn't reach NEA</span> · retrying in 10 min`); console.error(e); }
+}
+let busy=false, lastRun=0;
+async function tick(force){ if(busy) return; busy=true; try{ await refresh(force); lastRun=Date.now(); } finally{ busy=false; } }
+renderScale(); tick(true); setInterval(()=>tick(false),10*60*1000);
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible' && Date.now()-lastRun>5*60*1000) tick(false); });
+window.addEventListener('pageshow',e=>{ if(e.persisted) tick(false); });
+// re-layout charts on rotation
+window.addEventListener('orientationchange',()=>setTimeout(()=>{ if(MODEL){ Plotly.Plots.resize('chart'); Plotly.Plots.resize('chartAll'); } },300));
+
+</script></body></html>
