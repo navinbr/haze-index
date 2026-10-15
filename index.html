@@ -37,6 +37,7 @@ body{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 .eyebrow{font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:18px}
 h1{font-weight:500;font-size:clamp(38px,5.2vw,64px);line-height:1.02;letter-spacing:-.035em;margin:0}
 h1 em{font-style:normal;color:var(--burgundy)}
+.sub em{font-style:italic;font-weight:400;color:var(--burgundy)}
 .sub{font-style:italic;font-weight:300;font-size:clamp(19px,2vw,23px);line-height:1.4;letter-spacing:-.01em;color:var(--ink2);margin:16px 0 0;max-width:30em}
 .dek{font-weight:300;font-size:17px;line-height:1.55;color:var(--mut);margin:18px 0 0;max-width:36em}
 .lede{border-left:1px solid var(--rule);padding-left:28px}
@@ -135,7 +136,7 @@ footer .meta a{color:var(--ink2);text-decoration:underline;text-decoration-color
   <div>
    <div class="eyebrow">Air quality · Five regions · Updated hourly</div>
    <h1>Singapore hourly PSI</h1>
-   <p class="sub">An unofficial dashboard for the air this hour, rather than the last twenty-four.</p>
+   <p class="sub">What the air is like <em>this hour</em>, not the rolling average of the last twenty-four.</p>
    <p class="dek">Singapore's official PSI is a 24-hour rolling average. This page inverts that average to recover an estimated hourly PSI for each region, recomputed every time NEA publishes a new reading.</p>
    <div class="scale" id="scale"></div>
   </div>
